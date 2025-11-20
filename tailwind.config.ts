@@ -61,11 +61,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				pi: {
-					purple: '#6c3f99',
-					gold: '#fbc02d',
-					DEFAULT: '#6c3f99'
 				}
 			},
 			borderRadius: {

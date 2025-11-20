@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AlertTriangle, Fingerprint, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -115,9 +116,9 @@ const WalletUnlock = () => {
 
       <div className="px-4 py-4 sm:py-6 space-y-4 sm:space-y-6 max-w-md mx-auto">
         {/* Warning Banner - Matching header colors */}
-        <div className="bg-amber-50 border border-pi-gold rounded-lg p-3 sm:p-4 flex items-start space-x-3">
-          <i className="hgi-stroke hgi-alert-02 w-4 h-4 sm:w-5 sm:h-5 text-amber-700 mt-0.5 flex-shrink-0" />
-          <p className="text-xs sm:text-sm text-amber-800">
+        <div className="bg-yellow-100 border border-yellow-400 rounded-lg p-3 sm:p-4 flex items-start space-x-3">
+          <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-700 mt-0.5 flex-shrink-0" />
+          <p className="text-xs sm:text-sm text-yellow-800">
             <strong>Warning:</strong> If the Pi balance locked in your wallet is not greater than or equal to the amount you request, you will not be able to unlock.
           </p>
         </div>
@@ -131,7 +132,7 @@ const WalletUnlock = () => {
         {walletInfo && (
           <div className="bg-blue-50 border border-blue-300 rounded-lg p-3 space-y-2">
             <div className="flex items-center space-x-2 mb-2">
-              <i className="hgi-stroke hgi-wallet-02 w-4 h-4 text-blue-600" />
+              <Wallet className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium text-blue-800">Wallet Information</span>
             </div>
             
@@ -183,7 +184,7 @@ const WalletUnlock = () => {
             disabled={isLoading || !isValidPassphrase}
             className={`w-full py-3 sm:py-4 text-base sm:text-lg font-medium transition-colors ${
               isValidPassphrase 
-                ? 'bg-pi-purple hover:bg-purple-700 active:bg-purple-800 text-white'
+                ? 'bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white'
                 : 'bg-gray-400 text-gray-600 cursor-not-allowed'
             }`}
           >
@@ -192,9 +193,9 @@ const WalletUnlock = () => {
 
           <Button 
             onClick={handleUnlockWithFingerprint}
-            className="w-full bg-pi-purple hover:bg-purple-700 active:bg-purple-800 text-white py-3 sm:py-4 text-base sm:text-lg font-medium flex items-center justify-center space-x-2 transition-colors"
+            className="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white py-3 sm:py-4 text-base sm:text-lg font-medium flex items-center justify-center space-x-2 transition-colors"
           >
-            <i className="hgi-stroke hgi-finger-print w-4 h-4 sm:w-5 sm:h-5" />
+            <Fingerprint className="w-4 h-4 sm:w-5 sm:h-5" />
             <span>Unlock With Fingerprint</span>
           </Button>
         </div>
@@ -215,7 +216,7 @@ const WalletUnlock = () => {
         <Button 
           onClick={handleBack}
           variant="outline"
-          className="w-full py-3 text-sm sm:text-base text-pi-purple border-pi-purple hover:bg-purple-50 active:bg-purple-100 transition-colors"
+          className="w-full py-3 text-sm sm:text-base text-purple-600 border-purple-600 hover:bg-purple-50 active:bg-purple-100 transition-colors"
         >
           Back to Unlock Pi
         </Button>

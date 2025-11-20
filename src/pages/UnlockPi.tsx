@@ -1,12 +1,12 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Info, ChevronDown, ChevronUp, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 
 const UnlockPi = () => {
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
   const [piAmount, setPiAmount] = useState([1]);
   const [walletAddress, setWalletAddress] = useState("");
   const [isValidAddress, setIsValidAddress] = useState(false);
@@ -21,9 +21,8 @@ const UnlockPi = () => {
   };
 
   const handleSelectWallet = () => {
-    // Focus the wallet address input
-    inputRef.current?.focus();
-    inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Redirect to first page as specified
+    navigate("/");
   };
 
   const handleUnlockRequest = () => {
@@ -106,8 +105,8 @@ const UnlockPi = () => {
         />
         {/* Back button overlay */}
         <div className="absolute top-2 left-3 sm:top-3 sm:left-4">
-          <i 
-            className="hgi-stroke hgi-arrow-left-02 w-5 h-5 sm:w-6 sm:h-6 text-white cursor-pointer hover:text-pi-gold transition-colors" 
+          <ArrowLeft 
+            className="w-5 h-5 sm:w-6 sm:h-6 text-white cursor-pointer hover:text-orange-300 transition-colors" 
             onClick={handleBack} 
           />
         </div>
@@ -115,9 +114,9 @@ const UnlockPi = () => {
 
       <div className="px-4 py-4 sm:py-6 space-y-4 sm:space-y-6 max-w-md mx-auto">
         {/* Information Banner - Matching header colors */}
-        <div className="bg-amber-50 border border-pi-gold rounded-lg p-3 sm:p-4 flex items-start space-x-3">
-          <i className="hgi-stroke hgi-information-circle w-4 h-4 sm:w-5 sm:h-5 text-amber-700 mt-0.5 flex-shrink-0" />
-          <p className="text-xs sm:text-sm text-amber-800">
+        <div className="bg-yellow-100 border border-yellow-400 rounded-lg p-3 sm:p-4 flex items-start space-x-3">
+          <Info className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-700 mt-0.5 flex-shrink-0" />
+          <p className="text-xs sm:text-sm text-yellow-800">
             You can unlock the Pi you are locked in. Please select the amount of Pi you want to unlock.
           </p>
         </div>
@@ -125,9 +124,9 @@ const UnlockPi = () => {
         {/* Select Wallet Button - Matching header color */}
         <Button 
           onClick={handleSelectWallet}
-          className="w-full bg-pi-purple hover:bg-purple-700 active:bg-purple-800 text-white py-3 sm:py-4 text-base sm:text-lg font-medium transition-colors"
+          className="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white py-3 sm:py-4 text-base sm:text-lg font-medium transition-colors"
         >
-          Select Auto Unlock Amount
+          SELECT WALLET TO UNLOCK
         </Button>
 
         {/* Wallet Address Input with Balance Checking */}
@@ -137,7 +136,6 @@ const UnlockPi = () => {
           </label>
           <div className="relative">
             <Input
-              ref={inputRef}
               type="text"
               value={walletAddress}
               onChange={handleWalletAddressChange}
@@ -155,9 +153,9 @@ const UnlockPi = () => {
                 isValidAddress ? 'text-green-600' : 'text-red-600'
               }`}>
                 {isValidAddress ? (
-                  <i className="hgi-stroke hgi-checkmark-circle-02 w-4 h-4 sm:w-5 sm:h-5" />
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                 ) : (
-                  <i className="hgi-stroke hgi-cancel-circle w-4 h-4 sm:w-5 sm:h-5" />
+                  <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                 )}
               </div>
             )}
@@ -168,7 +166,7 @@ const UnlockPi = () => {
             <Button 
               onClick={handleCheckBalance}
               disabled={isCheckingBalance}
-              className="w-full bg-pi-purple hover:bg-purple-700 active:bg-purple-800 text-white py-2 text-sm font-medium transition-colors"
+              className="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white py-2 text-sm font-medium transition-colors"
             >
               {isCheckingBalance ? (
                 <div className="flex items-center justify-center space-x-2">
@@ -187,7 +185,7 @@ const UnlockPi = () => {
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-green-800">Locked Balance Found:</span>
                 <div className="flex items-center space-x-2">
-                  <span className="text-pi-gold font-bold">π</span>
+                  <span className="text-orange-500 font-bold">π</span>
                   <span className="text-sm font-bold text-green-800">
                     {lockedBalance.toLocaleString()}
                   </span>
@@ -196,7 +194,7 @@ const UnlockPi = () => {
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-green-800">Available to Unlock:</span>
                 <div className="flex items-center space-x-2">
-                  <span className="text-pi-gold font-bold">π</span>
+                  <span className="text-orange-500 font-bold">π</span>
                   <span className="text-sm font-bold text-green-800">
                     {Math.floor(lockedBalance * 0.5).toLocaleString()}
                   </span>
@@ -207,8 +205,8 @@ const UnlockPi = () => {
               <div className="space-y-2">
                 <label className="text-xs font-medium text-green-800">Select amount to unlock:</label>
                 <div className="flex items-center space-x-2 justify-center">
-                  <span className="text-lg font-bold text-pi-purple">π</span>
-                  <span className="text-lg font-bold text-pi-purple">{selectedUnlockAmount}</span>
+                  <span className="text-lg font-bold text-purple-600">π</span>
+                  <span className="text-lg font-bold text-purple-600">{selectedUnlockAmount}</span>
                 </div>
                 <Slider
                   value={[selectedUnlockAmount]}
@@ -253,9 +251,9 @@ const UnlockPi = () => {
             <span className="text-sm sm:text-base text-gray-800 font-medium">Why allow Unlock before locked Pi?</span>
             <div className="bg-gray-300 rounded-full p-1">
               {showFAQ ? (
-                <i className="hgi-stroke hgi-arrow-up-01 w-4 h-4 text-gray-600" />
+                <ChevronUp className="w-4 h-4 text-gray-600" />
               ) : (
-                <i className="hgi-stroke hgi-arrow-down-01 w-4 h-4 text-gray-600" />
+                <ChevronDown className="w-4 h-4 text-gray-600" />
               )}
             </div>
           </div>
@@ -263,7 +261,7 @@ const UnlockPi = () => {
           {showFAQ && (
             <div className="px-3 sm:px-4 pb-4 text-xs sm:text-sm text-gray-700 leading-relaxed space-y-3">
               <div>
-                <h4 className="font-bold text-pi-purple mb-2">Unlock Pi - A Balancing Act Between Growth and Stability</h4>
+                <h4 className="font-bold text-purple-600 mb-2">Unlock Pi - A Balancing Act Between Growth and Stability</h4>
                 <p>
                   Pi Network commits to building a sustainable ecosystem, where Pi is not only a digital asset but also has real value in the decentralized economy. To balance the need for early access to Pi and long-term growth, we propose a flexible unlocking mechanism, ensuring fairness, stability, and encouraging active community participation.
                 </p>
@@ -298,8 +296,8 @@ const UnlockPi = () => {
           </h3>
           
           <div className="flex items-center space-x-2 justify-center">
-            <span className="text-2xl sm:text-3xl font-bold text-pi-purple">π</span>
-            <span className="text-2xl sm:text-3xl font-bold text-pi-purple">{piAmount[0]}</span>
+            <span className="text-2xl sm:text-3xl font-bold text-purple-600">π</span>
+            <span className="text-2xl sm:text-3xl font-bold text-purple-600">{piAmount[0]}</span>
           </div>
 
           <div className="space-y-2">
@@ -340,7 +338,7 @@ const UnlockPi = () => {
           className={`w-full py-3 sm:py-4 text-base sm:text-lg font-medium transition-colors ${
             lockedBalance > 0 && piAmount[0] > Math.floor(lockedBalance * 0.5)
               ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-              : 'bg-pi-purple hover:bg-purple-700 active:bg-purple-800 text-white'
+              : 'bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white'
           }`}
         >
           UNLOCK REQUEST
